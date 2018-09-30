@@ -1,5 +1,5 @@
 language: cpp
-compiler: g++
+compiler: clang
 before_script:
 - sudo apt install libboost-test-dev -y
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
