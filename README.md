@@ -6,4 +6,5 @@ This C++ application with fully configured environment such as:
 - CI (travis)
 - Distribution system (bintray)
 # Dependencies
-spdlog, boost.test
+- spdlog
+- boost.test
