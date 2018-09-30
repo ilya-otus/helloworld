@@ -2,14 +2,15 @@ language: cpp
 compiler: g++
 before_script:
 - sudo apt install libboost-test-dev -y
-- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/source.list.d/xenial.list
+- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/source.list
 - sudo apt update
 - sudo apt install libspdlog-dev -y
 env:
-- MAJOR_VERSION=0
-- MINOR_VERSION=0
-- PACKAGE_FULL_VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${TRAVIS_BUILD_NUMBER}
-- PACKAGE_NAME=helloworld-${PACKAGE_FULL_VERSION}-Linux.deb
+    global:
+    - MAJOR_VERSION=0
+    - MINOR_VERSION=0
+    - PACKAGE_FULL_VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${TRAVIS_BUILD_NUMBER}
+    - PACKAGE_NAME=helloworld-${PACKAGE_FULL_VERSION}-Linux.deb
 script:
 - cmake .
 - cmake --build .
