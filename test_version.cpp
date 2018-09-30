@@ -4,8 +4,8 @@
 BOOST_AUTO_TEST_SUITE(helloworld_test_suite)
 BOOST_AUTO_TEST_CASE(helloworld_test_version)
 {
-    BOOST_CHECK(versionMajor() > 0);
-    BOOST_CHECK(versionMinor() > 0);
+    BOOST_CHECK(versionMajor() >= 0);
+    BOOST_CHECK(versionMinor() >= 0);
     BOOST_CHECK(versionPatch() > 0);
     std::string _version = std::to_string(versionMajor()) + "." +
                           std::to_string(versionMinor()) + "." +
