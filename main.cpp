@@ -1,4 +1,4 @@
-//#include "lib.h"
+#include "lib.h"
 #include <iostream>
 #include <string>
 #include <spdlog/spdlog.h>
@@ -10,10 +10,11 @@ int main(int argc, char *argv[])
     if (argc > 1) {
         bool isVersionRequired = std::string(argv[1]).compare("-v") == 0;
 	if (isVersionRequired) {
-	    logger->info("version {} was started", 12);
+	    logger->info("version {} was started", version());
 	}
     } else {
-	logger->info("Hello, world\n");
+	std::cout << "build " << versionPatch() << std::endl;
+	std::cout << "Hello, World!" << std::endl;
     }
     return 0;
 }
