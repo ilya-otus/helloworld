@@ -1,0 +1,35 @@
+environment:
+    MAJOR_VERSION: 0
+    MINOR_VERSION: 0
+    PACKAGE_FULL_VERSION: {{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}
+    PACKAGE_NAME: helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb
+jobs:
+    build:
+        docker:
+            - image: podshivalovilya/cppbuild:latest
+        working_directory: /usr/local/src
+        steps:
+            - checkout
+            - run:
+                name: "CMake project"
+                command: "cmake ."
+            - run:
+                name: "Building"
+                command: "cmake --build ."
+            - run:
+                name: "Running tests"
+                command: "cmake --build . --target test"
+            - run:
+                name: "Running packaging"
+                command: "cmake --build . --target package"
+            - store_artifacts:
+                path: ./
+    deploy:
+        docker:
+            - image: podshivalovilya/cppbuild:latest
+        working_directory: /usr/local/src
+        steps:
+            - run:
+                name: "Deploying to bintray"
+                comand: |
+                    curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${BUILDNUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
