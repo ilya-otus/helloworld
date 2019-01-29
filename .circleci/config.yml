@@ -30,6 +30,10 @@ jobs:
                 command: |
                     mkdir artifacts && \
                     mv *.deb artifacts
+            - save_cache:
+                key: artifacts
+                paths:
+                    - "artifacts"
             - store_artifacts:
                 path: ./artifacts
     deploy:
