@@ -2,8 +2,7 @@ global: &global
     environment:
         MAJOR_VERSION: 0
         MINOR_VERSION: 0
-        PACKAGE_FULL_VERSION: "{{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}"
-        PACKAGE_NAME: helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb
+        PROJECT_NAME: helloworld
     docker:
         - image: podshivalovilya/cppbuilder:latest
     working_directory: /usr/local/src
@@ -34,7 +33,8 @@ jobs:
             - run:
                 name: "Deploying to bintray"
                 command: |
-                    echo ${PACKAGE_NAME}
+                    export PACKAGE_NAME=${PROJECT_NAME}-${MAJOR_VERSION}.${MINOR_VERSION}.${BUILDNUM}-Linux.deb && \
+                    curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${BUILDNUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 workflows:
     version: 2
     build_deploy:
