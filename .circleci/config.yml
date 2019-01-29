@@ -33,8 +33,8 @@ jobs:
             - run:
                 name: "Deploying to bintray"
                 command: |
-                    export PACKAGE_NAME=${PROJECT_NAME}-${MAJOR_VERSION}.${MINOR_VERSION}.${BUILDNUMBER}-Linux.deb && \
-                    curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${BUILDNUMBER}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+                    export PACKAGE_NAME=${PROJECT_NAME}-${MAJOR_VERSION}.${MINOR_VERSION}.${CIRCLE_BUILD_NUM}-Linux.deb && \
+                    curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${CIRCLE_BUILD_NUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 workflows:
     version: 2
     build_deploy:
