@@ -3,8 +3,8 @@ jobs:
     environment:
         MAJOR_VERSION: 0
         MINOR_VERSION: 0
-        PACKAGE_FULL_VERSION: {{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}
-        PACKAGE_NAME: helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb
+        PACKAGE_FULL_VERSION: "{{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}"
+        PACKAGE_NAME: "helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb"
     build:
         docker:
             - image: podshivalovilya/cppbuild:latest
