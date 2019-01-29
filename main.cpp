@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "src/lib.h"
 #include <iostream>
 #include <string>
 #include <spdlog/spdlog.h>
