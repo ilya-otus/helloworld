@@ -1,10 +1,10 @@
-[![Build Status](https://travis-ci.org/ilya-otus/helloworld.svg?branch=master)](https://travis-ci.org/ilya-otus/helloworld)
+[![Build Status](https://circleci.com/gh/ilya-otus/helloworld.svg?style=svg)](https://circleci.com/gh/ilya-otus/helloworld)
 # Helloworld
 This C++ application with fully configured environment such as:
 - logging (spdlog)
 - tests (boost tests)
 - versioning
-- CI (travis)
+- CI (circleci)
 - Distribution system (bintray)
 # Dependencies
 - spdlog
