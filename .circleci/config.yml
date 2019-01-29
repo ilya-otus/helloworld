@@ -24,7 +24,7 @@ jobs:
                 name: "Running packaging"
                 command: "cmake --build . --target package"
             - store_artifacts:
-                path: ./
+                path: ./*.deb
     deploy:
         docker:
             - image: podshivalovilya/cppbuilder:latest

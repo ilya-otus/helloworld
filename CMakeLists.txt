@@ -24,6 +24,7 @@ set_target_properties(helloworld PROPERTIES
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 target_link_libraries(helloworld
+    pthread
     hello
 )
 install(TARGETS helloworld RUNTIME DESTINATION bin)
