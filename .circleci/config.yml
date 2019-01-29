@@ -5,12 +5,12 @@ global: &global
         PROJECT_NAME: helloworld
     docker:
         - image: podshivalovilya/cppbuilder:latest
-    working_directory: /usr/local/src
 
 version: 2
 jobs:
     build:
         <<: *global
+        working_directory: /usr/local/src
         steps:
             - checkout
             - run:
@@ -34,12 +34,13 @@ jobs:
                 path: ./artifacts
     deploy:
         <<: *global
+        working_directory: /usr/local/src/artifacts
         steps:
             - run:
                 name: "Deploying to bintray"
                 command: |
                     export PACKAGE_NAME=${PROJECT_NAME}-${MAJOR_VERSION}.${MINOR_VERSION}.${CIRCLE_PREVIOUS_BUILD_NUM}-Linux.deb && \
-                    curl -T artifacts/${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${CIRCLE_PREVIOUS_BUILD_NUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+                    curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${CIRCLE_PREVIOUS_BUILD_NUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 workflows:
     version: 2
     build_deploy:
