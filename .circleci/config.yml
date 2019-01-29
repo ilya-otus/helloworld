@@ -25,15 +25,10 @@ jobs:
             - run:
                 name: "Running packaging"
                 command: "cmake --build . --target package"
-            - run:
-                name: "Move artifacts to special directory"
-                command: |
-                    mkdir artifacts && \
-                    mv *.deb artifacts
             - persist_to_workspace:
                 root: ./
                 paths:
-                    - artifacts/*.deb
+                    - ./*.deb
     deploy:
         <<: *global
         steps:
