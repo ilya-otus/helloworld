@@ -32,7 +32,7 @@ jobs:
         steps:
             - run:
                 name: "Deploying to bintray"
-                comand: |
+                command: |
                     curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${BUILDNUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 workflows:
     version: 2
