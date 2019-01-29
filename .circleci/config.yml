@@ -1,14 +1,17 @@
+global: &global
+    environment:
+        MAJOR_VERSION: 0
+        MINOR_VERSION: 0
+        PACKAGE_FULL_VERSION: "{{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}"
+        PACKAGE_NAME: "helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb"
+    docker:
+        - image: podshivalovilya/cppbuilder:latest
+    working_directory: /usr/local/src
+
 version: 2
 jobs:
     build:
-        environment:
-            MAJOR_VERSION: 0
-            MINOR_VERSION: 0
-            PACKAGE_FULL_VERSION: "{{ .Environment.MAJOR_VERSION }}.{{ .Environment.MINOR_VERSION }}.{{ .BuildNum }}"
-            PACKAGE_NAME: "helloworld-{{ .Environment.PACKAGE_FULL_VERSION }}-Linux.deb"
-        docker:
-            - image: podshivalovilya/cppbuilder:latest
-        working_directory: /usr/local/src
+        <<: *global
         steps:
             - checkout
             - run:
@@ -26,9 +29,7 @@ jobs:
             - store_artifacts:
                 path: ./*.deb
     deploy:
-        docker:
-            - image: podshivalovilya/cppbuilder:latest
-        working_directory: /usr/local/src
+        <<: *global
         steps:
             - run:
                 name: "Deploying to bintray"
