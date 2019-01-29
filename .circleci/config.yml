@@ -34,9 +34,9 @@ jobs:
                     mkdir artifacts && \
                     mv *.deb artifacts
             - persist_to_workspace:
-                root: artifacts
+                root: ./
                 paths:
-                    - *.deb
+                    - artifacts/*.deb
     deploy:
         <<: *global
         executor: cppbuilder
