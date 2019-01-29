@@ -3,17 +3,14 @@ global: &global
         MAJOR_VERSION: 0
         MINOR_VERSION: 0
         PROJECT_NAME: helloworld
-executors:
-    cppbuilder:
-        docker:
-            - image: podshivalovilya/cppbuilder:latest
-        working_directory: /usr/local/src
+    docker:
+        - image: podshivalovilya/cppbuilder:latest
+    working_directory: /usr/local/src
 
 version: 2
 jobs:
     build:
         <<: *global
-        executor: cppbuilder
         steps:
             - checkout
             - run:
@@ -39,7 +36,6 @@ jobs:
                     - artifacts/*.deb
     deploy:
         <<: *global
-        executor: cppbuilder
         steps:
             - attach_workspace:
                 at: artifacts
