@@ -33,7 +33,7 @@ jobs:
         <<: *global
         steps:
             - attach_workspace:
-                at: artifacts
+                at: ./
             - run:
                 name: "Deploying to bintray"
                 command: |
