@@ -32,6 +32,7 @@ jobs:
                     mv *.deb artifacts
             - store_artifacts:
                 path: ./artifacts
+                destination: /usr/local/src
     deploy:
         <<: *global
         steps:
