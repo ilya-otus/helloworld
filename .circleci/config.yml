@@ -40,9 +40,13 @@ jobs:
         <<: *global
         working_directory: /usr/local/src/artifacts
         steps:
+            - restore_cache:
+                keys:
+                    - artifacts
             - run:
                 name: "Deploying to bintray"
                 command: |
+                    ls -lh && \
                     export PACKAGE_NAME=${PROJECT_NAME}-${MAJOR_VERSION}.${MINOR_VERSION}.${CIRCLE_PREVIOUS_BUILD_NUM}-Linux.deb && \
                     curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${CIRCLE_PREVIOUS_BUILD_NUM}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 workflows:
